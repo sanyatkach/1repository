@@ -1,4 +1,4 @@
-from flask import Flask, escape, request #@iLevanta
+from flask import Flask, escape, request, render_template  # @iLevanta
 
 app = Flask(__name__)
 
@@ -12,5 +12,13 @@ def first():
     num = 12
     str = '213'
     return f'{escape(n)}:{escape(num)},{escape(str)}'
+@app.route('/second', methods=['GET','POST'])
+def second():
+    if  request.method == 'GET':
+        return render_template('./index.html')
+    if request.method == 'POST':
+        test = request.form.get('text')
+        print(test)
+        return f'{test}'
 if __name__ == '__main__':
     app.run('0.0.0.0')
