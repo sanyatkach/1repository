@@ -14,11 +14,14 @@ def first():
     return f'{escape(n)}:{escape(num)},{escape(str)}'
 @app.route('/second', methods=['GET','POST'])
 def second():
-    if  request.method == 'GET':
-        return render_template('./index.html')
+    if request.method == 'GET':
+        return render_template('index.html')
     if request.method == 'POST':
-        test = request.form.get('text')
-        print(test)
-        return f'{test}'
+        text = request.form.get('text')
+        first = "".join(reversed(text))
+        second = "".join([x for x in text[::-1]])
+        third = text[::-1]
+        return render_template('index.html', first=first, second=second, third=third)
+        # you can add text on this page again without reloading it
 if __name__ == '__main__':
     app.run('0.0.0.0')
