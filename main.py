@@ -19,9 +19,7 @@ def second():
     if request.method == 'POST':
         text = request.form.get('text')
         first = "".join(reversed(text))
-        second = "".join([x for x in text[::-1]])
-        third = text[::-1]
-        return render_template('index.html', first=first, second=second, third=third)
+        return render_template('index.html', first=first)
         # you can add text on this page again without reloading it
 if __name__ == '__main__':
     app.run('0.0.0.0')
