@@ -29,7 +29,7 @@ def second():
 @app.route('/third', methods=['GET','POST'])
 def third():
     if request.method == 'GET':
-        return render_template('./third.html', content='\u0020', deck=str(deck))
+        return render_template('third.html', content='\u0020', deck=str(deck))
     else:
         if "shuffle" in request.form:
             deck.shuffle()
@@ -41,6 +41,6 @@ def third():
         else:
             num = request.form.get("index")
             value = deck.index(num)
-        return render_template('./third.html', content=value)
+        return render_template('third.html', content=value)
 if __name__ == '__main__':
     app.run('0.0.0.0')

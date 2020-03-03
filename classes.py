@@ -9,7 +9,7 @@ class Card:
         self.suit = suit
 
     def __str__(self):
-        return self.suit+self.rank
+        return f'{self.suit} of {self.rank}'
 
 
 class Deck:
@@ -19,9 +19,6 @@ class Deck:
         suits = ('\u2660', '\u2663', '\u2665', '\u2666')
         for suit, rank in itertools.product(suits, ranks):
             self.cards.append(Card(suit, rank))
-
-    def __str__(self):
-        return self.cards
 
     def shuffle(self):
         random.shuffle(self.cards)
