@@ -4,10 +4,13 @@ from classes import Deck
 app = Flask(__name__)
 deck = Deck()
 
+
 @app.route('/')
 def hello():
     name = request.args.get("name", "World")
     return f'Oleksandr Tkachenko TS-91'
+
+
 @app.route('/first')
 def first():
     n = None
@@ -15,7 +18,8 @@ def first():
     str = '213'
     return f'{escape(n)}:{escape(num)},{escape(str)}'
 
-@app.route('/second', methods=['GET','POST'])
+
+@app.route('/second', methods=['GET', 'POST'])
 def second():
     if request.method == 'GET':
         return render_template('index.html')
@@ -26,7 +30,8 @@ def second():
         rev3 = "".join([x for x in reversed(text)])  # comprehension
         return f'{rev1},{rev2},{rev3}'
 
-@app.route('/third', methods=['GET','POST'])
+
+@app.route('/third', methods=['GET', 'POST'])
 def third():
     if request.method == 'GET':
         return render_template('third.html', content='\u0020', deck=str(deck))
@@ -42,5 +47,24 @@ def third():
             num = request.form.get("index")
             value = deck.index(num)
         return render_template('third.html', content=value)
+
+
+@app.route('/fourth', methods=['GET', 'POST'])
+def fourth():
+    if request.method == 'GET':
+        return render_template('fourth.html')
+    if request.method == 'POST':
+        start = int(request.form.get("start"))
+        end = int(request.form.get('end'))
+        list1 = list(range(start, end))
+        for num in range(start, end):
+            if num%3 == 0:
+                return(num)
+
+
+
+    return render_template('fourth.html', content=num, cret = list1)
+
+
 if __name__ == '__main__':
     app.run('0.0.0.0')
